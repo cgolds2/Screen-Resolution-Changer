@@ -31,7 +31,7 @@ namespace ScreenResChanger
         {
             DEVMODE DM = new DEVMODE();
             DM.dmSize = (ushort)Marshal.SizeOf(DM);
-            EnumDisplaySettings(null, i, ref DM);
+            EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"), i, ref DM);
             if (ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0 && ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0)
             {
                 return true;
@@ -61,7 +61,7 @@ namespace ScreenResChanger
             int iOMI = 0;
             int i = 0;
 
-            for (iOMI = 0; !(EnumDisplaySettings(null, iOMI, ref SelDM) == false); iOMI++)
+            for (iOMI = 0; !(EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"), iOMI, ref SelDM) == false); iOMI++)
             {
                 Console.WriteLine(
                     "F = " + SelDM.dmDisplayFrequency.ToString() +
@@ -82,7 +82,7 @@ namespace ScreenResChanger
 
                     break;
             }
-            if (EnumDisplaySettings(null, iOMI, ref DM) == false)
+            if (EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"), iOMI, ref DM) == false)
             {
                 iOMI = -1;
                 getCurrentRes(ref DM,null);
@@ -131,7 +131,7 @@ namespace ScreenResChanger
 
             // Retrieving current settings
             // to edit them
-            EnumDisplaySettings(null,
+            EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"),
                 -1,
                 ref originalMode);
 
@@ -406,9 +406,9 @@ namespace ScreenResChanger
             DEVMODE OSpecs = new DEVMODE();
             getCurrentRes(ref OSpecs,null);
 
-            int selH = 900;
-            int selW = 1600;
-            int selF = 0;
+            int selH = 768;
+            int selW = 1024;
+            int selF =60;
             int selG = (int)OSpecs.dmDisplayFlags;
             int selB = (int)OSpecs.dmBitsPerPel;
             int Ondx = getDMbySpecs((int)OSpecs.dmPelsHeight, (int)OSpecs.dmPelsWidth, (int)OSpecs.dmDisplayFrequency, (int)OSpecs.dmDisplayFlags, (int)OSpecs.dmBitsPerPel, ref OSpecs);
@@ -421,8 +421,11 @@ namespace ScreenResChanger
             if (Nndx == -1)
             {
                 Console.WriteLine("Could not find specified mode");
+                return;
             }
-            else if (setDisplayMode(ref NSpecs) || setDisplayMode(Nndx)) //This is just to illustrate both ways of doing it. One or the other may be more convenient (ie, the latter if you are getting this from a file, the former if you already have the DEVMODE in your program, etc.)
+            bool test = setDisplayMode(ref NSpecs);
+            test |= setDisplayMode(Nndx);
+            if (test) //This is just to illustrate both ways of doing it. One or the other may be more convenient (ie, the latter if you are getting this from a file, the former if you already have the DEVMODE in your program, etc.)
             {
                 //reset display mode to original after waiting long enough to see it changed
                 Console.WriteLine("Current res is " + NSpecs.dmPelsHeight + " by " + NSpecs.dmPelsWidth + "\n");
