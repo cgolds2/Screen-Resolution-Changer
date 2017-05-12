@@ -85,16 +85,16 @@ namespace ScreenResChanger
             if (EnumDisplaySettings(null, iOMI, ref DM) == false)
             {
                 iOMI = -1;
-                getCurrentRes(ref DM);
+                getCurrentRes(ref DM,null);
             }
             return iOMI;
         }
 
-        static void getCurrentRes(ref DEVMODE dm)
+        static void getCurrentRes(ref DEVMODE dm, string DisplayName)
         {
             dm = new DEVMODE();
             dm.dmSize = (ushort)Marshal.SizeOf(dm);
-            EnumDisplaySettings(null, -1, ref dm);
+            EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"), -1, ref dm);
             return;
         }
 
@@ -173,13 +173,12 @@ namespace ScreenResChanger
 
         [DllImport("User32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern Boolean EnumDisplaySettings(
-          [param: MarshalAs(UnmanagedType.LPTStr)]
-          string lpszDeviceName,
-          [param: MarshalAs(UnmanagedType.U4)]
-          int iModeNum,
-          [In, Out]
-          ref DEVMODE lpDevMode);
+        internal static extern Boolean EnumDisplaySettings(
+           byte[] lpszDeviceName,
+           [param: MarshalAs(UnmanagedType.U4)]
+        int iModeNum,
+            [In, Out]
+        ref DEVMODE lpDevMode);
 
         [StructLayout(LayoutKind.Sequential,
     CharSet = CharSet.Ansi)]
@@ -354,11 +353,24 @@ namespace ScreenResChanger
             }
         }
 
+        public static byte[] ToLPTStr(string str)
+        {
+            var lptArray = new byte[str.Length + 1];
+
+            var index = 0;
+            foreach (char c in str.ToCharArray())
+                lptArray[index++] = Convert.ToByte(c);
+
+            lptArray[index] = Convert.ToByte('\0');
+
+            return lptArray;
+        }
+
         private void btnGetProfiles_Click(object sender, EventArgs e)
         {
             Screen Srn = Screen.AllScreens[(int)dgvScreens.SelectedRows[0].Cells[0].Value];
             DEVMODE OSpecs = new DEVMODE();
-            getCurrentRes(ref OSpecs);
+            getCurrentRes(ref OSpecs,null);
 
 
             OSpecs.dmSize = (ushort)Marshal.SizeOf(OSpecs);
@@ -368,7 +380,10 @@ namespace ScreenResChanger
             int i = 0;
             dgvProfiles.Rows.Clear();
 
-            for (iOMI = 0; !(EnumDisplaySettings(null, iOMI, ref SelDM) == false); iOMI++)
+
+
+
+            for (iOMI = 0; !(EnumDisplaySettings(ToLPTStr(Srn.DeviceName), iOMI, ref SelDM) == false); iOMI++)
             {
                 dgvProfiles.Rows.Add(i, SelDM.dmPelsWidth.ToString(), SelDM.dmPelsHeight.ToString(), SelDM.dmDisplayFrequency.ToString());
                 Console.WriteLine(
@@ -389,7 +404,7 @@ namespace ScreenResChanger
         private void button1_Click(object sender, EventArgs e)
         {
             DEVMODE OSpecs = new DEVMODE();
-            getCurrentRes(ref OSpecs);
+            getCurrentRes(ref OSpecs,null);
 
             int selH = 900;
             int selW = 1600;
