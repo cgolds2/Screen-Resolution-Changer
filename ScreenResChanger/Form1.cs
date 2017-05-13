@@ -43,6 +43,8 @@ namespace ScreenResChanger
         }
         static bool setDisplayMode(ref DEVMODE DM)
         {
+            ChangeDisplaySettingsEx(ToLPTStr("\\\\.\\DISPLAY1"), ref DM,(IntPtr) null, (uint)(ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY | ChangeDisplaySettingsFlags.CDS_NORESET), (IntPtr)null);
+            ChangeDisplaySettingsEx(null, ref DM, (IntPtr)null, 0, (IntPtr)null);
             if (ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0 && ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0)
             {
                 return true;
@@ -302,6 +304,22 @@ namespace ScreenResChanger
     ref DEVMODE lpDevMode,
     [param: MarshalAs(UnmanagedType.U4)]
     uint dwflags);
+
+        [DllImport("user32.dll")]
+        internal static extern int ChangeDisplaySettingsEx(
+      byte[] lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd,
+      uint dwflags, IntPtr lParam);
+
+
+
+        //        LONG ChangeDisplaySettingsEx(
+        //  _In_ LPCTSTR lpszDeviceName,
+        //  _In_ DEVMODE *lpDevMode,
+        //       HWND hwnd,
+        //  _In_ DWORD   dwflags,
+        //  _In_ LPVOID  lParam
+        //);
+
 
         public static void GetCurrentSettings()
         {
