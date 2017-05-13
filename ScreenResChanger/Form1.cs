@@ -32,7 +32,9 @@ namespace ScreenResChanger
             DEVMODE DM = new DEVMODE();
             DM.dmSize = (ushort)Marshal.SizeOf(DM);
             EnumDisplaySettings(ToLPTStr("\\\\.\\DISPLAY1"), i, ref DM);
-            if (ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0 && ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0)
+            bool test = ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0;
+            test &= ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0;
+            if (test)
             {
                 return true;
             }
@@ -43,9 +45,12 @@ namespace ScreenResChanger
         }
         static bool setDisplayMode(ref DEVMODE DM)
         {
+            DEVMODE d = new DEVMODE();
             ChangeDisplaySettingsEx(ToLPTStr("\\\\.\\DISPLAY1"), ref DM,(IntPtr) null, (uint)(ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY | ChangeDisplaySettingsFlags.CDS_NORESET), (IntPtr)null);
-            ChangeDisplaySettingsEx(null, ref DM, (IntPtr)null, 0, (IntPtr)null);
-            if (ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0 && ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0)
+            ChangeDisplaySettingsEx(null,ref d, (IntPtr)null, 0, (IntPtr)null);
+            bool test = ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_TEST) == 0;
+            test &= ChangeDisplaySettings(ref DM, (uint)ChangeDisplaySettingsFlags.CDS_UPDATEREGISTRY) == 0;
+            if (test)
             {
                 return true;
             }
