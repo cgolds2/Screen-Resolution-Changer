@@ -1,0 +1,11 @@
+Layout
+//Number
+//Width
+//Height
+//Frequency
+
+//1
+\\.\DISPLAY1
+640
+480
+59

@@ -56,7 +56,17 @@ namespace ScreenResChanger
 
         }
 
-
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Screen Srn = Screen.AllScreens[(int)dgvScreens.SelectedRows[0].Cells[0].Value];
+            ScreenChanger.screenRes s = new ScreenChanger.screenRes(
+                (int)dgvProfiles.SelectedRows[0].Cells[2].Value,
+          (int)dgvProfiles.SelectedRows[0].Cells[1].Value,
+          (int)dgvProfiles.SelectedRows[0].Cells[3].Value
+                );
+            s.DisplayName = Srn.DeviceName;
+            DataHandeler.writeProfile(2,s);
+        }
     }
 }
 

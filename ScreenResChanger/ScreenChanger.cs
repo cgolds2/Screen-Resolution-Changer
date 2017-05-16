@@ -402,6 +402,9 @@ namespace ScreenResChanger
             public int Height;
             public int Width;
             public int DisplayFrequency;
+
+            //only used for loading from file
+            public string DisplayName;
              public screenRes(int height, int width, int displayFrequency)
             {
                 Height = height;
