@@ -14,17 +14,30 @@ namespace ScreenResChanger
         [STAThread]
         static void Main(string[] args)
         {
-            if(args.Count() == 0) { 
+            //MessageBox.Show("parameter count = " + args.Length.ToString());
+            if (args.Count() == 0) { 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
             }
             else
             {
+                List<ScreenChanger.screenRes> profile = DataHandeler.loadAllFromFile(); ;
                 foreach (string item in args)
                 {
-                   ScreenChanger.screenRes s =  DataHandeler.loadFromFile(Int32.Parse(item));
-                    ScreenChanger.setDisplayRes(s.DisplayName,s);
+                    //MessageBox.Show(item);
+                    int number = Int32.Parse(item.Trim());
+                    foreach (ScreenChanger.screenRes pro in profile)
+                    {
+                        if(number == pro.profileNumber)
+                        {
+                            //MessageBox.Show(pro.DisplayName);
+                            ScreenChanger.setDisplayRes(pro.DisplayName, pro);
+                            break;
+                        }
+                    }
+                  // ScreenChanger.screenRes s =  DataHandeler.loadFromFile();
+
                 }
                 Application.Exit();
             }

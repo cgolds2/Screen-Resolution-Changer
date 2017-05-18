@@ -29,7 +29,7 @@ namespace ScreenResChanger
             {
                 if (lines[i].Equals("//" + profileNumber.ToString()))
                 {
-
+                   
                     returnRes.DisplayName = lines[i + 1];
                     returnRes.Width = Int32.Parse(lines[i + 2]);
                     returnRes.Height = Int32.Parse(lines[i + 3]);
