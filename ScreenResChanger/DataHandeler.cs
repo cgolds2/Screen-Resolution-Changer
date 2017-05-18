@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,9 @@ namespace ScreenResChanger
 {
     class DataHandeler
     {
-        static string fileName = "";
+        static string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+       public static string fileName = Directory.GetParent(exePath).FullName + "\\Profiles.txt";
+       
         public static void changeScreenToProfile(int profileNumber)
         {
             ScreenChanger.screenRes s = loadFromFile(profileNumber);
