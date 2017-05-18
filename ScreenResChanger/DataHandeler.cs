@@ -10,7 +10,7 @@ namespace ScreenResChanger
     class DataHandeler
     {
         static string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-       public static string fileName = Directory.GetParent(exePath).FullName + "\\Profiles.txt";
+         public static string fileName = Directory.GetParent(exePath).FullName + "\\Profiles.txt";
        
         public static void changeScreenToProfile(int profileNumber)
         {
@@ -22,7 +22,23 @@ namespace ScreenResChanger
             }
             ScreenChanger.setDisplayRes(s.DisplayName, s);
         }
+        public static bool userAgreed()
+        {
+            try
+            {
+                string[] lines = System.IO.File.ReadAllLines(Directory.GetParent(exePath).FullName + "\\License.txt");
+                if (lines[0].Equals("Agree=True") || lines[0].Equals("Agree=true"))
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+            return false;
+        }
         
         public static ScreenChanger.screenRes loadFromFile(int profileNumber)
         {

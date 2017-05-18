@@ -16,10 +16,16 @@ namespace ScreenResChanger
         static void Main(string[] args)
         {
             //MessageBox.Show("parameter count = " + args.Length.ToString());
+            if (!DataHandeler.userAgreed())
+            {
+                MessageBox.Show("License not agreed to");
+                return;
+            }
             if (!File.Exists(DataHandeler.fileName))
             {
                 File.Create(DataHandeler.fileName).Dispose();
             }
+           // MessageBox.Show(DataHandeler.fileName);
             if (args.Count() == 0) { 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -54,7 +60,7 @@ namespace ScreenResChanger
                   // ScreenChanger.screenRes s =  DataHandeler.loadFromFile();
 
                 }
-                Application.Exit();
+                return;
             }
         }
     }
