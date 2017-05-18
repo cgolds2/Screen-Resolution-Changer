@@ -32,14 +32,24 @@ namespace ScreenResChanger
                 {
                     //MessageBox.Show(item);
                     int number = Int32.Parse(item.Trim());
+                    bool found = false;
                     foreach (ScreenChanger.screenRes pro in profile)
                     {
                         if(number == pro.profileNumber)
                         {
+                            found = true;
                             //MessageBox.Show(pro.DisplayName);
                             ScreenChanger.setDisplayRes(pro.DisplayName, pro);
                             break;
                         }
+                       
+                    }
+                    if (!found)
+                    {
+                        MessageBox.Show("Could not find profile number " + number.ToString());
+                    }else
+                    {
+                        MessageBox.Show("Profile " + number.ToString() + " loaded");
                     }
                   // ScreenChanger.screenRes s =  DataHandeler.loadFromFile();
 
