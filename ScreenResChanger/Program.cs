@@ -21,7 +21,12 @@ namespace ScreenResChanger
             }
             else
             {
-
+                foreach (string item in args)
+                {
+                   ScreenChanger.screenRes s =  DataHandeler.loadFromFile(Int32.Parse(item));
+                    ScreenChanger.setDisplayRes(s.DisplayName,s);
+                }
+                Application.Exit();
             }
         }
     }

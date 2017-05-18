@@ -41,9 +41,19 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.setResolution = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSaveProfile = new System.Windows.Forms.Button();
+            this.lblScreenName = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvSavedProfiles = new System.Windows.Forms.DataGridView();
+            this.btnNewProfile = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DisplayFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScreens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSavedProfiles)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvScreens
@@ -119,7 +129,7 @@
             this.dataGridViewTextBoxColumn4,
             this.Frequency});
             this.dgvProfiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvProfiles.Location = new System.Drawing.Point(15, 210);
+            this.dgvProfiles.Location = new System.Drawing.Point(15, 237);
             this.dgvProfiles.MultiSelect = false;
             this.dgvProfiles.Name = "dgvProfiles";
             this.dgvProfiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -151,7 +161,7 @@
             // 
             // setResolution
             // 
-            this.setResolution.Location = new System.Drawing.Point(483, 210);
+            this.setResolution.Location = new System.Drawing.Point(483, 237);
             this.setResolution.Name = "setResolution";
             this.setResolution.Size = new System.Drawing.Size(160, 40);
             this.setResolution.TabIndex = 4;
@@ -159,22 +169,104 @@
             this.setResolution.UseVisualStyleBackColor = true;
             this.setResolution.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // btnSaveProfile
             // 
-            this.button1.Location = new System.Drawing.Point(545, 380);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnSaveProfile.Location = new System.Drawing.Point(483, 283);
+            this.btnSaveProfile.Name = "btnSaveProfile";
+            this.btnSaveProfile.Size = new System.Drawing.Size(160, 40);
+            this.btnSaveProfile.TabIndex = 5;
+            this.btnSaveProfile.Text = "Save to Profile";
+            this.btnSaveProfile.UseVisualStyleBackColor = true;
+            this.btnSaveProfile.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // lblScreenName
+            // 
+            this.lblScreenName.AutoSize = true;
+            this.lblScreenName.Location = new System.Drawing.Point(90, 221);
+            this.lblScreenName.Name = "lblScreenName";
+            this.lblScreenName.Size = new System.Drawing.Size(52, 13);
+            this.lblScreenName.TabIndex = 6;
+            this.lblScreenName.Text = "None Set";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 221);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(81, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Current Screen:";
+            // 
+            // dgvSavedProfiles
+            // 
+            this.dgvSavedProfiles.AllowUserToAddRows = false;
+            this.dgvSavedProfiles.AllowUserToDeleteRows = false;
+            this.dgvSavedProfiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSavedProfiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.DisplayFrequency});
+            this.dgvSavedProfiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvSavedProfiles.Location = new System.Drawing.Point(649, 237);
+            this.dgvSavedProfiles.MultiSelect = false;
+            this.dgvSavedProfiles.Name = "dgvSavedProfiles";
+            this.dgvSavedProfiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSavedProfiles.Size = new System.Drawing.Size(541, 438);
+            this.dgvSavedProfiles.TabIndex = 9;
+            // 
+            // btnNewProfile
+            // 
+            this.btnNewProfile.Location = new System.Drawing.Point(483, 329);
+            this.btnNewProfile.Name = "btnNewProfile";
+            this.btnNewProfile.Size = new System.Drawing.Size(160, 40);
+            this.btnNewProfile.TabIndex = 10;
+            this.btnNewProfile.Text = "Create New Profile";
+            this.btnNewProfile.UseVisualStyleBackColor = true;
+            this.btnNewProfile.Click += new System.EventHandler(this.btnNewProfile_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Profile Number";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Screen Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Resolution X";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Resolution Y";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // DisplayFrequency
+            // 
+            this.DisplayFrequency.HeaderText = "Display Frequency";
+            this.DisplayFrequency.Name = "DisplayFrequency";
+            this.DisplayFrequency.ReadOnly = true;
+            this.DisplayFrequency.Width = 80;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 687);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1202, 687);
+            this.Controls.Add(this.btnNewProfile);
+            this.Controls.Add(this.dgvSavedProfiles);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblScreenName);
+            this.Controls.Add(this.btnSaveProfile);
             this.Controls.Add(this.setResolution);
             this.Controls.Add(this.dgvProfiles);
             this.Controls.Add(this.btnGetProfiles);
@@ -182,8 +274,10 @@
             this.Controls.Add(this.dgvScreens);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvScreens)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSavedProfiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,7 +298,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
         private System.Windows.Forms.Button setResolution;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveProfile;
+        private System.Windows.Forms.Label lblScreenName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvSavedProfiles;
+        private System.Windows.Forms.Button btnNewProfile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayFrequency;
     }
 }
 

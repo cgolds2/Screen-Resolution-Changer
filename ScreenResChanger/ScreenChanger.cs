@@ -405,11 +405,16 @@ namespace ScreenResChanger
 
             //only used for loading from file
             public string DisplayName;
+            public int profileNumber;
              public screenRes(int height, int width, int displayFrequency)
             {
                 Height = height;
                 Width = width;
                 DisplayFrequency = displayFrequency;
+            }
+            public screenRes()
+            {
+
             }
         }
     }

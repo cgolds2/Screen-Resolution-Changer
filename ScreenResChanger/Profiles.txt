@@ -1,11 +1,21 @@
 Layout
-//Number
-//Width
-//Height
-//Frequency
+--Number
+--Width
+--Height
+--Frequency
 
 //1
-\\.\DISPLAY1
+\\.\DISPLAY2
+1920
+1080
+60
+//2
+\\.\DISPLAY2
 640
 480
-59
+75
+//3
+\\.\DISPLAY2
+640
+480
+60

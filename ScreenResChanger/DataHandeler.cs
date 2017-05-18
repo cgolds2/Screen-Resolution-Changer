@@ -19,13 +19,15 @@ namespace ScreenResChanger
             }
             ScreenChanger.setDisplayRes(s.DisplayName, s);
         }
+
+        
         public static ScreenChanger.screenRes loadFromFile(int profileNumber)
         {
             ScreenChanger.screenRes returnRes = null;
             string[] lines = System.IO.File.ReadAllLines(fileName);
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i].Equals("////" + profileNumber.ToString()))
+                if (lines[i].Equals("//" + profileNumber.ToString()))
                 {
 
                     returnRes.DisplayName = lines[i + 1];
@@ -36,6 +38,26 @@ namespace ScreenResChanger
                 }
             }
 
+            return returnRes;
+        }
+
+        public static List<ScreenChanger.screenRes> loadAllFromFile()
+        {
+            List<ScreenChanger.screenRes> returnRes = new List<ScreenChanger.screenRes>();
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Contains("//"))
+                {
+                    ScreenChanger.screenRes profile = new ScreenChanger.screenRes();
+                    profile.profileNumber = Int32.Parse(lines[i].Replace("//", ""));
+                    profile.DisplayName = lines[i + 1];
+                    profile.Width = Int32.Parse(lines[i + 2]);
+                    profile.Height = Int32.Parse(lines[i + 3]);
+                    profile.DisplayFrequency = Int32.Parse(lines[i + 4]);
+                    returnRes.Add(profile);
+                }
+            }
             return returnRes;
         }
 
