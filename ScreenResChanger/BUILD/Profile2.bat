@@ -1,0 +1,1 @@
+"ScreenResChanger.exe" "2"
