@@ -5,7 +5,7 @@ This is an open-source screen resolution changer.  You can find the executable i
 # How to use
 You can run the executable to find the resolutions for each of your monitors, and switch to them and set profile.  Each profile can be run through the command line by using *"$executableLocation" "$profileNumber"*.  You can also set a shourtcut to target a batch file with this line in it, then drag and drop the shortvut to your taskbar.  Doing this allows you to have a taskbar icon that is a one-click resolution changer
 
-You can find all the necessary files in the zip, including the exe and a few example profile-running batch files
+You can find all the necessary files in the Build folder, including the exe and a few example profile-running batch files.  You can also compile the program yourself if you so choose.
 
 # About
 This project is used for education purposes only, and was made using Visual Studios Communition Edition under the education license.
