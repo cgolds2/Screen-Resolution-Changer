@@ -1,1 +1,1 @@
-"ScreenResChanger.exe" "2"
+"D:\Connor\Documents\Visual Studio 2015\Projects\ScreenResChanger\ScreenResChanger\bin\Debug\ScreenResChanger.exe" "2"
